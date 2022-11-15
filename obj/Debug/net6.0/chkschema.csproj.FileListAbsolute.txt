@@ -1,0 +1,15 @@
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\bin\Debug\net6.0\chkschema.exe
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\bin\Debug\net6.0\chkschema.deps.json
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\bin\Debug\net6.0\chkschema.runtimeconfig.json
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\bin\Debug\net6.0\chkschema.dll
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\bin\Debug\net6.0\chkschema.pdb
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\chkschema.csproj.AssemblyReference.cache
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\chkschema.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\chkschema.AssemblyInfoInputs.cache
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\chkschema.AssemblyInfo.cs
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\chkschema.csproj.CoreCompileInputs.cache
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\chkschema.dll
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\ref\chkschema.dll
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\chkschema.pdb
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\chkschema.genruntimeconfig.cache
+C:\Users\volpe\OneDrive\Documents\VS Code\chkschema\obj\Debug\net6.0\refint\chkschema.dll
