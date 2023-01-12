@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Xml.Linq;
-// using DocumentFormat.OpenXml;
-// using DocumentFormat.OpenXml.Packaging;
-// using DocumentFormat.OpenXml.Spreadsheet;  
-// using DocumentFormat.OpenXml.Wordprocessing;
 using System.Data;
 using System.Data.SqlClient;
 using System.Xml;
 using System.Xml.Schema;
-// using OSCALHelperClasses;
 using System.Linq;
 using System.Text;
 using System.IO;
@@ -23,29 +18,11 @@ namespace chkschema
     class Program 
     {
 
-       // static string CS = @"Server=localhost\SQLEXPRESS01;Database=CONVERTREPO;Trusted_Connection=False;User Id=vitgadmin; Password=neBUla6853#";
-       // static string FR_Profile = "https://raw.githubusercontent.com/GSA/fedramp-automation/release/fedramp1.0.0-oscal1.0.0/baselines/rev4/xml/FedRAMP_rev4_MODERATE-baseline_profile.xml";
-
-        //static string CS = "Server=sqldev19.volpegroup.com;Database=OWT_DEV;Trusted_Connection=False;User Id=vitgadmin; Password=neBUla6853#";
-        //static string DNS = "http://csrc.nist.gov/ns/oscal/1.0";
-        //static string NS ="https://fedramp.gov/ns/oscal";
-        //static string CatREF = "https://doi.org/10.6028/NIST.SP.800-60v2r1";
-        //static string SSPTemplateFile = "SSPOUTLINE.txt";
-        //static string SystemIdentifierType = "https://fedramp.gov";
-        //static string OSCALVer = "1.0.2";
-        //static string SSPText = string.Empty;
-        //public StreamWriter sw;
-        //public static string SecuritySensitivityLevel = string.Empty;
-        //List<string> ControlIDs;
-        //public static List<string>[,] RespRoleList = new List<string>[10,2];
-        //public static int RRListCount = 0;
-        //public static int imageCount = 0;
-        //public static int mapId = 1;
         public static int val_line=0;
         public static bool SuccessfulValidation = true;
-        //static string AppRootPath = "C:\\Users\\volpe\\OneDrive\\Documents\\VS Code\\WordToOSCAL\\";
         public const string XMLNamespace = @"http://csrc.nist.gov/ns/oscal/1.0";
-        public const string SSPschema = "oscal_ssp_schema.xsd";
+        public const string OSCALVersion = "1.0.4";
+
         enum ExitCode : int {
             Success = 0,
             Error = -1,
@@ -55,8 +32,9 @@ namespace chkschema
         static int Main(string[] args)
         {
             int a = 0;
-            string Usage = "Usage 1.0: chkschema <OSCAL Document> <schema.xsd>";
-            Usage = Usage + "SSP - oscal_ssp_schema.xsd\nSAP - oscal_assessment-plan_schema.xsd\nSAR - oscal_assessment-results_schema.xsd\nPOAM - oscal_poam_schema.xsd\nCATLOG - oscal_catalog_schema.xsd\nPROFILE - oscal_profile_schema.xsd\n";
+            string Usage = "VITG chkschema Version 1.1 (01-05-2023)";
+            Usage = Usage + "\nUsage 1.1: chkschema <OSCAL Document (XML)> <schema.xsd>";
+            Usage = Usage + string.Format ("\nCurrent Schemas ({0}):\n\toscal_ssp_schema.xsd (SSP)\n\toscal_assessment-plan_schema.xsd (AP)\n\toscal_assessment-results_schema.xsd (AR)\n\toscal_poam_schema.xsd (POAM)\n\toscal_catalog_schema.xsd (CATALOG)\n\toscal_profile_schema.xsd (PROFILE)\n", OSCALVersion);
             foreach(string arg in args)
             {
                 a++;
@@ -64,7 +42,7 @@ namespace chkschema
             if (a == 2) 
             {
                 string myDoc = args[0];
-                string myOSCALSchema = string.Format("{0}{1}", "C:\\Users\\volpe\\OneDrive\\Desktop\\OSCALDemoFiles\\schemas\\", args[1]);
+                string myOSCALSchema = string.Format("{0}{1}", "C:\\utils\\schemas\\", args[1]);
                 Console.WriteLine("Checking: {0} against {1}...", myDoc, myOSCALSchema);
                  PseudoValidator(myDoc, myOSCALSchema);
                  if (!SuccessfulValidation)
@@ -83,7 +61,7 @@ namespace chkschema
  
         }
 
-         public static void PseudoValidator(string XmlDocument, string XsdSchemaPath)
+        public static void PseudoValidator(string XmlDocument, string XsdSchemaPath)
         {
             try
             {
@@ -99,13 +77,13 @@ namespace chkschema
                 OscalDoc.Close();
                 //SuccessfulValidation = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // SuccessfulValidation = false;
-                throw ex;
+                //throw ex;
             }
         }
-        private static void OSCALSettingsValidationEventHandler(object sender, ValidationEventArgs e)
+        private static void OSCALSettingsValidationEventHandler(object? sender, ValidationEventArgs e)
         {
             if (e.Severity == XmlSeverityType.Warning)
             {
