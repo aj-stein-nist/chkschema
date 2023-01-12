@@ -1,17 +1,7 @@
-﻿using System;
-using System.Xml.Linq;
-using System.Data;
-using System.Data.SqlClient;
+﻿
 using System.Xml;
 using System.Xml.Schema;
-using System.Linq;
-using System.Text;
-using System.IO;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.Drawing;
-using System.Diagnostics;
+
 
 namespace chkschema
 {
@@ -42,8 +32,13 @@ namespace chkschema
             if (a == 2) 
             {
                 string myDoc = args[0];
+                if (!File.Exists(myDoc)) 
+                {
+                    Console.WriteLine(string.Format("Error: File Not Found - {0}", myDoc));
+                    return (int)ExitCode.BadArgs;
+                }
                 string myOSCALSchema = string.Format("{0}{1}", "C:\\utils\\schemas\\", args[1]);
-                Console.WriteLine("Checking: {0} against {1}...", myDoc, myOSCALSchema);
+                Console.WriteLine("Checking: {0} against {1}...\n", myDoc, myOSCALSchema);
                  PseudoValidator(myDoc, myOSCALSchema);
                  if (!SuccessfulValidation)
                  {  
