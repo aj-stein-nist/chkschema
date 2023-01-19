@@ -8,7 +8,6 @@ namespace chkschema
     class Program 
     {
 
-        public static int val_line=0;
         public static bool SuccessfulValidation = true;
         public const string XMLNamespace = @"http://csrc.nist.gov/ns/oscal/1.0";
         public const string OSCALVersion = "1.0.4";
@@ -22,7 +21,7 @@ namespace chkschema
         static int Main(string[] args)
         {
             int a = 0;
-            string Usage = "VITG chkschema Version 1.1 (01-05-2023)";
+            string Usage = "chkschema Version 1.0 (01-05-2023)";
             Usage = Usage + "\nUsage 1.1: chkschema <OSCAL Document (XML)> <schema.xsd>";
             Usage = Usage + string.Format ("\nCurrent Schemas ({0}):\n\toscal_ssp_schema.xsd (SSP)\n\toscal_assessment-plan_schema.xsd (AP)\n\toscal_assessment-results_schema.xsd (AR)\n\toscal_poam_schema.xsd (POAM)\n\toscal_catalog_schema.xsd (CATALOG)\n\toscal_profile_schema.xsd (PROFILE)\n", OSCALVersion);
             foreach(string arg in args)
@@ -66,16 +65,15 @@ namespace chkschema
                 OscalSettings.ValidationType = ValidationType.Schema;
                 OscalSettings.ValidationEventHandler += new ValidationEventHandler(OSCALSettingsValidationEventHandler);
                 XmlReader OscalDoc = XmlReader.Create(XmlDocument, OscalSettings);
-                val_line=0;
-                while (OscalDoc.Read()) { val_line++; }
+
+                while (OscalDoc.Read()) { }
 
                 OscalDoc.Close();
-                //SuccessfulValidation = true;
+
             }
             catch (Exception)
             {
-                // SuccessfulValidation = false;
-                //throw ex;
+
             }
         }
         private static void OSCALSettingsValidationEventHandler(object? sender, ValidationEventArgs e)
@@ -85,7 +83,7 @@ namespace chkschema
                 
                 Console.WriteLine("Warning: {0}", e.Message);
                 SuccessfulValidation = false;
-                //throw e.Exception;
+
             }
             else if (e.Severity == XmlSeverityType.Error)
             {
@@ -93,7 +91,7 @@ namespace chkschema
 
                 Console.WriteLine("Error: {0}", e.Message);
                 SuccessfulValidation = false;
-                //throw e.Exception;
+
             }
         }
     }
