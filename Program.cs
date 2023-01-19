@@ -36,7 +36,12 @@ namespace chkschema
                     Console.WriteLine(string.Format("Error: File Not Found - {0}", myDoc));
                     return (int)ExitCode.BadArgs;
                 }
-                string myOSCALSchema = string.Format("{0}{1}", "C:\\utils\\schemas\\", args[1]);
+                string myOSCALSchema = string.Format("{0}{1}", "schemas\\", args[1]);
+                if (!File.Exists(myOSCALSchema))
+                {
+                    Console.WriteLine(string.Format("Error: File Not Found - {0}", myOSCALSchema));
+                    return (int)ExitCode.BadArgs;
+                }
                 Console.WriteLine("Checking: {0} against {1}...\n", myDoc, myOSCALSchema);
                  PseudoValidator(myDoc, myOSCALSchema);
                  if (!SuccessfulValidation)
